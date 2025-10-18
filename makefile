@@ -6,4 +6,7 @@ tf-apply:
 
 tf-destroy:
 	terraform -chdir=./terraform destroy
-	
+
+secrets:
+	cp ./terraform/secrets-auto-template.tfvars ./terraform/secrets.auto.tfvars
+	cp ./terraform/secrets-backend-template.tfvars ./terraform/secrets.backend.tfvars
