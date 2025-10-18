@@ -1,2 +1,5 @@
 yc_token     = ""
 yc_folder_id = ""
+db_name      = "value"
+db_user      = "value"
+db_password  = "value"
