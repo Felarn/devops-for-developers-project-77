@@ -1,0 +1,5 @@
+bucket            = ""
+access_key        = ""
+secret_key        = ""
+dynamodb_endpoint = ""
+dynamodb_table    = ""

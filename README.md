@@ -1,2 +1,10 @@
 ### Hexlet tests and linter status:
+
 [![Actions Status](https://github.com/Felarn/devops-for-developers-project-77/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Felarn/devops-for-developers-project-77/actions)
+
+# requirements
+
+- host machine with:
+  - terraform
+  - ansible
+  - make

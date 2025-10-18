@@ -1,3 +1,12 @@
 inventory.ini
 vault.yml
 vault-key
+
+.terraform
+
+*secret*
+*.backup
+*.tfstate
+*.tfstate.*
+
+!*template*
