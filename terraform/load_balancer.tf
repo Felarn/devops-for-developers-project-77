@@ -55,8 +55,8 @@ resource "yandex_alb_load_balancer" "devops-3-load-balancer" {
         certificate_ids = [yandex_cm_certificate.devops-3-certificate.id]
       }
       sni_handler {
-        name         = "devops3-sni"
-        server_names = ["devops-3.felarn-project.ru"]
+        name         = "devops-3-sni"
+        server_names = [var.domain_address]
         handler {
           http_handler {
             http_router_id = yandex_alb_http_router.devops-3-router.id
@@ -135,5 +135,5 @@ resource "yandex_alb_virtual_host" "devops-3-host" {
       }
     }
   }
-  authority = ["devops-3.felarn-project.ru"]
+  authority = [var.domain_address]
 }
