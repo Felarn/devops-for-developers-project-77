@@ -1,0 +1,99 @@
+- name: Setup pip & docker
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Apt update
+      ansible.builtin.apt:
+        update_cache: true
+      tags: setup
+
+    - name: Install pip
+      ansible.builtin.import_role:
+        name: geerlingguy.pip
+      tags: setup
+
+    - name: Pip install docker
+      ansible.builtin.pip:
+        name: docker
+        state: present
+      tags: setup
+
+    - name: Install docker
+      ansible.builtin.import_role:
+        name: geerlingguy.docker
+      tags: setup
+
+    - name: Check docker version
+      ansible.builtin.command: docker --version
+      register: docker_check
+      failed_when: docker_check.rc != 0
+      changed_when: false
+      tags: setup
+
+- name: Setup Redmine
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Create redmine directory
+      ansible.builtin.file:
+        path: '/opt/redmine'
+        state: directory
+        mode: '0755'
+      tags: redmine
+
+    - name: Copy redmine.env file
+      ansible.builtin.template:
+        src: templates/redmine.env
+        dest: '/opt/redmine/.env'
+        mode: '0640'
+      tags: redmine
+
+    - name: Pull Redmine image
+      community.docker.docker_image:
+        name: redmine:latest
+        source: pull
+        force_source: true
+      tags: redmine
+
+    - name: Start Redmine container
+      community.docker.docker_container:
+        name: redmine
+        image: redmine:latest
+        restart_policy: unless-stopped
+        ports:
+          - '{{ redmine_port }}:3000'
+        env_file: '/opt/redmine/.env'
+        volumes:
+          - '/opt/redmine/files:/usr/src/redmine/files'
+        state: started
+        detach: true
+      tags: redmine
+
+- name: Setup DataDog
+  hosts: webservers
+  become: true
+
+  tasks:
+    - name: Import the Datadog Agent role
+      ansible.builtin.import_role:
+        name: datadog.dd.agent
+      tags: datadog
+
+    - name: Copy HTTP_check
+      ansible.builtin.template:
+        src: templates/http_check-template.yml
+        dest: /etc/datadog-agent/conf.d/http_check.d/redmine.yaml
+        owner: dd-agent
+        group: dd-agent
+        mode: '0644'
+      notify: restart datadog-agent
+      tags: datadog
+
+    - name: Start datadog-agent
+      ansible.builtin.service:
+        name: datadog-agent
+        state: restarted
+        enabled: true
+      tags: datadog

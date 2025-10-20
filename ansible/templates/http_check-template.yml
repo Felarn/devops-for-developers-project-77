@@ -1,0 +1,12 @@
+init_config:
+
+instances:
+  - name: 'Redmine Service Check'
+    url: 'http://localhost:{{ redmine_port }}/login'
+    timeout: 5
+    content_match: 'Redmine'
+    tags:
+      - 'service:redmine'
+      - 'env:production'
+    collect_response_time: true
+    skip_event: true

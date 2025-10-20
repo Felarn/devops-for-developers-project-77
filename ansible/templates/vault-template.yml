@@ -1,0 +1,7 @@
+vault_db_host: 'replace with your database host path'
+vault_db_name: 'replace with your database name'
+vault_db_port: 'replace with your database port'
+vault_db_username: 'replace with your database username'
+vault_db_password: 'replace with your database password'
+
+vault_datadog_api_key: 'replace with your Datadog API key'
