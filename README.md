@@ -2,6 +2,16 @@
 
 [![Actions Status](https://github.com/Felarn/devops-for-developers-project-77/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Felarn/devops-for-developers-project-77/actions)
 
+# Deployed project
+
+You can access the deployed project page using the links below:
+
+```
+http://felarn-project.online
+http://felarn-project.ru
+
+```
+
 # requirements
 
 - host machine with:
