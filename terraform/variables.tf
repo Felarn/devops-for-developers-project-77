@@ -50,3 +50,9 @@ variable "vm_admin_username" {
   type      = string
   sensitive = false
 }
+
+variable "domain_address" {
+  description = "Domain address for application load balancer"
+  type        = string
+  sensitive   = false
+}
