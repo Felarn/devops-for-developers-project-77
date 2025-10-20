@@ -10,3 +10,5 @@ vault-key
 *.tfstate.*
 
 !*template*
+
+*temporary*
