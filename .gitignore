@@ -1,6 +1,6 @@
 inventory.ini
 vault.yml
-vault-key
+vault-key*
 
 .terraform
 

@@ -4,7 +4,7 @@ install-ansible-requirements:
 copy-templates:
 	cp templates/inventory-template.ini inventory.ini
 	cp templates/vault-template.yml group_vars/webservers/vault.yml
-	cp templates/vault-key vault-key
+	cp templates/vault-key-template vault-key
 
 setup:
 	ansible-playbook -i inventory.ini playbook.yml --vault-password-file vault-key --tags setup

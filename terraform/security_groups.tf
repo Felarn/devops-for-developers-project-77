@@ -60,10 +60,11 @@ resource "yandex_vpc_security_group" "devops-3-appservers" {
   }
 
   ingress {
-    protocol          = "TCP"
-    description       = "temp for future App"
-    port              = 3000
-    security_group_id = yandex_vpc_security_group.devops-3-balancer.id
+    protocol       = "TCP"
+    description    = "for app access"
+    port           = 3000
+    v4_cidr_blocks = ["0.0.0.0/0"]
+    # security_group_id = yandex_vpc_security_group.devops-3-balancer.id
   }
 
   egress {

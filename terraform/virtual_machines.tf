@@ -22,8 +22,9 @@ resource "yandex_compute_instance" "vm-1" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.devops-3-subnet.id
-    nat       = true
+    subnet_id          = yandex_vpc_subnet.devops-3-subnet.id
+    nat                = true
+    security_group_ids = [yandex_vpc_security_group.devops-3-appservers.id]
   }
 
   metadata = {
@@ -68,8 +69,9 @@ resource "yandex_compute_instance" "vm-2" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.devops-3-subnet.id
-    nat       = true
+    subnet_id          = yandex_vpc_subnet.devops-3-subnet.id
+    nat                = true
+    security_group_ids = [yandex_vpc_security_group.devops-3-appservers.id]
   }
 
   metadata = {
