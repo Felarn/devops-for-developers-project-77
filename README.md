@@ -59,3 +59,53 @@ make tf-apply
 ```
 make tf-apply
 ```
+
+# Project deployment
+
+## Workspace preparation:
+
+### Install dependencies
+
+run these commands on your host system to install required software:
+
+```
+sudo apt-get install -y ansible python3-pip
+
+pip3 install docker ansible-vault
+
+make ans-install-requirements
+```
+
+### Setup secrets
+
+Create config files from templates using the following command:
+
+```
+make ans-copy-templates
+```
+
+Fill in files with actual parameters:
+
+- ./ansible/vault-key
+- ./ansible/inventory.ini
+- ./ansible/group_vars/webservers/vault.yml
+
+Encrypt the vault file
+
+```
+make vault-encrypt
+```
+
+If you need to change settings in group_vars/webservers/vault.yml file after encryption use these commands:
+
+```
+make vault-decrypt
+# make changes
+make vault-encrypt
+```
+
+## Deploy project
+
+```
+make ans-deploy
+```
