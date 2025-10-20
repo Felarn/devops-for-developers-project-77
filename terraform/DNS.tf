@@ -2,7 +2,7 @@ resource "yandex_dns_zone" "devops-3-zone" {
   name        = "devops-3-zone"
   description = "Production DNS zone for ${var.domain_address}"
   zone        = "${var.domain_address}."
-  # public      = true
+  public      = true
 }
 
 resource "yandex_dns_recordset" "alb-record" {

@@ -27,3 +27,36 @@ resource "yandex_vpc_subnet" "devops-3-subnet" {
   v4_cidr_blocks = ["10.5.0.0/24"]
   folder_id      = var.yc_folder_id
 }
+
+# resource "yandex_cm_certificate" "devops-3-certificate-tf" {
+#   name        = "devops-3-certificate-tf"
+#   description = "managed certificate for devops-3 project, created by terraform"
+#   domains     = [var.domain_address]
+
+#   managed {
+#     challenge_type = "DNS_CNAME"
+#   }
+
+# }
+
+
+// Create a new Certificates for the domain
+//
+resource "yandex_cm_certificate" "devops-3-certificate" {
+  name        = "devops-3-certificate-tf"
+  description = "managed certificate for devops-3 project, created by terraform"
+  domains     = [var.domain_address]
+
+  managed {
+    challenge_type = "DNS_CNAME"
+  }
+}
+
+resource "yandex_dns_recordset" "devops-3-certificate-challenges" {
+  count   = 1
+  zone_id = yandex_dns_zone.devops-3-zone.id
+  name    = yandex_cm_certificate.devops-3-certificate.challenges[0].dns_name
+  type    = yandex_cm_certificate.devops-3-certificate.challenges[0].dns_type
+  data    = [yandex_cm_certificate.devops-3-certificate.challenges[0].dns_value]
+  ttl     = 60
+}

@@ -37,6 +37,36 @@ resource "yandex_alb_load_balancer" "devops-3-load-balancer" {
     }
   }
 
+  listener {
+    name = "devops-3-listener-https"
+    endpoint {
+      address {
+        external_ipv4_address {
+          address = yandex_vpc_address.devops-3-external-static-ip.external_ipv4_address[0].address
+        }
+      }
+      ports = [443]
+    }
+    tls {
+      default_handler {
+        http_handler {
+          http_router_id = yandex_alb_http_router.devops-3-router.id
+        }
+        certificate_ids = [yandex_cm_certificate.devops-3-certificate.id]
+      }
+      sni_handler {
+        name         = "devops3-sni"
+        server_names = ["devops-3.felarn-project.ru"]
+        handler {
+          http_handler {
+            http_router_id = yandex_alb_http_router.devops-3-router.id
+          }
+          certificate_ids = [yandex_cm_certificate.devops-3-certificate.id]
+        }
+      }
+    }
+  }
+
   log_options {
     disable = true
   }
@@ -105,5 +135,5 @@ resource "yandex_alb_virtual_host" "devops-3-host" {
       }
     }
   }
-
+  authority = ["devops-3.felarn-project.ru"]
 }
