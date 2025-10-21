@@ -6,11 +6,7 @@
 
 You can access the deployed project page using the links below:
 
-```
-http://felarn-project.online
 http://felarn-project.ru
-
-```
 
 # requirements
 
