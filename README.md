@@ -2,6 +2,10 @@
 
 [![Actions Status](https://github.com/Felarn/devops-for-developers-project-77/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Felarn/devops-for-developers-project-77/actions)
 
+### upmon
+
+![Upmon](https://app.upmon.com/badge/16b37c3e-6871-4a64-a164-18013b/WnMJXrHU-2.svg)
+
 # Deployed project
 
 You can access the deployed project page using the links below:
