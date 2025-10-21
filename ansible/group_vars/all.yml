@@ -1,3 +1,6 @@
+pip_install_packages:
+  - name: docker
+
 redmine_port: 3000
 
 ansible_python_interpreter: /usr/bin/python3
