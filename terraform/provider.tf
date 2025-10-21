@@ -5,8 +5,10 @@ terraform {
     }
     datadog = {
       source = "DataDog/datadog"
-
     }
+    local = {
+      source  = "hashicorp/local"
+    }    
   }
 }
 
