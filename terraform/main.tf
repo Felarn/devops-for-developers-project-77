@@ -3,6 +3,10 @@ terraform {
     yandex = {
       source = "yandex-cloud/yandex"
     }
+    datadog = {
+      source = "DataDog/datadog"
+
+    }
   }
   required_version = ">= 0.13"
 }
@@ -13,3 +17,8 @@ provider "yandex" {
   folder_id = var.yc_folder_id
 }
 
+provider "datadog" {
+  api_key = var.datadog_api_key
+  app_key = var.datadog_app_key
+  api_url = var.datadog_api_url
+}

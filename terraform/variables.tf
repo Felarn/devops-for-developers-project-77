@@ -56,3 +56,22 @@ variable "domain_address" {
   type        = string
   sensitive   = false
 }
+
+variable "datadog_api_key" {
+  description = "Datadog API key"
+  type        = string
+  sensitive   = true
+
+}
+
+variable "datadog_api_url" {
+  description = "Datadog API URL"
+  type        = string
+  sensitive   = false
+}
+
+variable "datadog_app_key" {
+  description = "Datadog application key"
+  type        = string
+  sensitive   = true
+}
